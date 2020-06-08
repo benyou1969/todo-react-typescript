@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { TodoListItem } from "./components/TodoListItem";
-import { Todo, ToggleTodo } from "./types";
+import { Todo, ToggleTodo, AddTodo } from "./types";
 import { TodoList } from "./components/TodoList";
+import { AddTodoForm } from "./components/AddTodoForm";
 
 const initialTodos: Array<Todo> = [
     { text: "Go shopping", complete: true },
@@ -21,9 +22,17 @@ const App: React.FC = () => {
 
         setTodos(newTodos);
     };
+
+    const addTodo: AddTodo = (newTodo) => {
+        if (newTodo) {
+            setTodos([...todos, { text: newTodo, complete: false }]);
+        }
+    };
+
     return (
         <>
             <TodoList todos={todos} toggleTodo={toggleTodo} />
+            <AddTodoForm addTodo={addTodo} />
         </>
     );
 };
